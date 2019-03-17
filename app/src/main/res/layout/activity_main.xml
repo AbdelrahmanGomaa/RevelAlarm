@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+
+        android:id="@+id/line1"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+<DatePicker
+    android:layout_weight="1"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/date_picker"
+    android:datePickerMode="calendar"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"></DatePicker>
+
+
+<TimePicker
+    android:scrollbarSize="5dp"
+    android:layout_weight="1"
+    android:layout_below="@+id/date_picker"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/time_picker"
+    android:timePickerMode="clock"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"></TimePicker>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_margin="20dp"
+        android:text="TIME:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#090"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/titleEditText"
+        android:hint="Write your Title here"
+        android:layout_below="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+
+        android:onClick="setTimer"
+        android:id="@+id/Button"
+        android:text="set Alarm"
+        android:layout_below="@+id/titleEditText"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>
