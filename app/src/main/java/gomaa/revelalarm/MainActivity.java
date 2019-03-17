@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         editText.setText("");
 
         //3600000
-        ReminderNotification(getNotification(title), 60000);
+        ReminderNotification(getNotification(title,60000), 0);
 
 
 
@@ -134,19 +133,21 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra(MyBroadcastReceiver.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 24444, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+       // long futureInMillis = SystemClock.elapsedRealtime() + delay;
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal_alarm.getTimeInMillis(), pendingIntent);
 
     }
 
 
-    private Notification getNotification(String content) {
+
+    private Notification getNotification(String content, int delay) {
 
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("Revel Alarm");
         builder.setContentText(content);
         builder.setSmallIcon(R.drawable.ic_launcher_background);
+
         return builder.build();
 
     }
