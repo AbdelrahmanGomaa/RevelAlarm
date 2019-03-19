@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         notificationManager = NotificationManagerCompat.from(this);
 
 
-        // datePicker = findViewById(R.id.date_picker);
+         datePicker = findViewById(R.id.date_picker);
         timePicker = findViewById(R.id.time_picker);
         textView = findViewById(R.id.timeTextView);
 
         setButton = findViewById(R.id.Button);
         editText = findViewById(R.id.titleEditText);
-     /*   datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+        datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 mMonth=monthOfYear;
                 mDay=dayOfMonth;
             }
-        });*/
+        });
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
         cal_alarm.set(Calendar.HOUR_OF_DAY, mHour);
         cal_alarm.set(Calendar.MINUTE, mMin);
         cal_alarm.set(Calendar.SECOND, 0);
-        // cal_alarm.set(Calendar.YEAR,mYear);
-        // cal_alarm.set(Calendar.MONTH,mMonth);
-        // cal_alarm.set(Calendar.DAY_OF_MONTH,mDay);
+         cal_alarm.set(Calendar.YEAR,mYear);
+         cal_alarm.set(Calendar.MONTH,mMonth);
+         cal_alarm.set(Calendar.DAY_OF_MONTH,mDay);
 
         if (cal_alarm.before(cal_now)) {
 
@@ -150,7 +150,9 @@ public class MainActivity extends AppCompatActivity {
         calnoti.set(Calendar.HOUR_OF_DAY, mHour-1);
         calnoti.set(Calendar.MINUTE, mMin);
         calnoti.set(Calendar.SECOND, 0);
-
+        calnoti.set(Calendar.YEAR,mYear);
+        calnoti.set(Calendar.MONTH,mMonth);
+        calnoti.set(Calendar.DAY_OF_MONTH,mDay);
         //long futureInMillis2 = SystemClock.elapsedRealtime() + delay;
         AlarmManager alarmManager2 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager2.set(AlarmManager.RTC_WAKEUP, calnoti.getTimeInMillis(), pendingIntent2);
