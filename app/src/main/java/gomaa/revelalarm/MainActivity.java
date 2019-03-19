@@ -90,30 +90,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void setTimer(View v) {
 
-         String title = editText.getText().toString();
+        String title = editText.getText().toString();
         textView.setText(title);
         editText.setText("");
 
         //3600000
-        ReminderNotification(getNotification(title,60000), 0);
-
-
-
-
+        ReminderNotification(getNotification(title));
+        scheduleNotification(getNotification(title));
 
 
     }
 
-    private void ReminderNotification(Notification notification, int delay) {
+    private void ReminderNotification(Notification notification) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Date date = new Date();
         Calendar cal_alarm = Calendar.getInstance();
         Calendar cal_now = Calendar.getInstance();
 
-
         cal_alarm.setTime(date);
         cal_now.setTime(date);
-
 
         cal_alarm.set(Calendar.HOUR_OF_DAY, mHour);
         cal_alarm.set(Calendar.MINUTE, mMin);
@@ -133,15 +128,36 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra(MyBroadcastReceiver.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 24444, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
-       // long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        // long futureInMillis = SystemClock.elapsedRealtime() + delay;
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, cal_alarm.getTimeInMillis(), pendingIntent);
-
     }
 
 
 
-    private Notification getNotification(String content, int delay) {
+    //// Alarm to getting notification only befor one hour of the main alarm
+    private void scheduleNotification(Notification notification) {
+
+        Intent notificationIntent2 = new Intent(MainActivity.this, NotificationPublisher.class);
+        notificationIntent2.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent2.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent2 = PendingIntent.getBroadcast(MainActivity.this, 0, notificationIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
+        Date date = new Date();
+
+        Calendar calnoti = Calendar.getInstance();
+        calnoti.setTime(date);
+
+        calnoti.set(Calendar.HOUR_OF_DAY, mHour-1);
+        calnoti.set(Calendar.MINUTE, mMin);
+        calnoti.set(Calendar.SECOND, 0);
+
+        //long futureInMillis2 = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager2 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager2.set(AlarmManager.RTC_WAKEUP, calnoti.getTimeInMillis(), pendingIntent2);
+    }
+
+
+    private Notification getNotification(String content) {
 
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("Revel Alarm");
@@ -151,6 +167,16 @@ public class MainActivity extends AppCompatActivity {
         return builder.build();
 
     }
+   /* private Notification getNotification2(String content, int delay) {
+
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle("Revel Alarm");
+        builder.setContentText(content);
+        builder.setSmallIcon(R.drawable.ic_launcher_background);
+
+        return builder.build();
+
+    }*/
 
 
 }

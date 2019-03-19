@@ -32,6 +32,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         int id = intent.getIntExtra(NOTIFICATION_ID, 0);
         manager.notify(id, notification );
 
+
+
         /*notification.flags= Notification.FLAG_AUTO_CANCEL;
         manager.notify(0,notification );*/
 
@@ -40,6 +42,12 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         Ringtone r =  RingtoneManager.getRingtone(context,notificationn);
         r.play();
 
+
+        /*NotificationManager  manager2= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Notification notification2  = intent.getParcelableExtra(NOTIFICATION);
+        int id2 = intent.getIntExtra(NOTIFICATION_ID, 0);
+        manager2.notify(id, notification2 );*/
 
 
 

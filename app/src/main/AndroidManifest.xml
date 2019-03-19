@@ -24,6 +24,7 @@
         </activity>
 
         <receiver android:name=".MyBroadcastReceiver"></receiver>
+        <receiver android:name=".NotificationPublisher"></receiver>
     </application>
 
 </manifest>
